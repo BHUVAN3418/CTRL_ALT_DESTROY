@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.pkl
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Node / React
+node_modules/
+frontend/build/
+frontend/.env
+.npm
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets
+*.pem
+*.key
+*.cert
+.env.local
+.env.production
+secrets/
+
+# Data (large files)
+ml/data/*.csv
+ml/models/*.pkl
