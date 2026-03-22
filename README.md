@@ -346,11 +346,6 @@ We chose a **Web Application** over a native mobile app for Phase 1 for the foll
 
 ---
 
-## 👥 Team
-
-| Member | Role |
-|---|---|
-| [Your Name] | Full Stack + AI/ML |
 
 ---
 
