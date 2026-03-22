@@ -1,423 +1,359 @@
-# 🌧️ RainGuard AI — Parametric Income Insurance for Food Delivery Workers
+# 🌧️ RainGuard AI
+### AI-Powered Parametric Income Insurance for Food Delivery Workers
 
 > **"When rain stops work, RainGuard pays automatically."**
 
-[![Phase](https://img.shields.io/badge/Phase-1%20Seed-orange)](https://github.com)
-[![Stack](https://img.shields.io/badge/Stack-FastAPI%20%2B%20React%20%2B%20scikit--learn-blue)](https://github.com)
-[![Status](https://img.shields.io/badge/Status-Active%20Development-green)](https://github.com)
+![Guidewire DEVTrails 2026](https://img.shields.io/badge/Guidewire-DEVTrails%202026-1D4E8A?style=for-the-badge)
+![Phase](https://img.shields.io/badge/Phase-1%20%7C%20Seed-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-In%20Progress-orange?style=for-the-badge)
 
 ---
 
-## Table of Contents
-
-1. [The Problem](#1-the-problem)
-2. [Our Solution](#2-our-solution)
-3. [Weekly Premium Model](#3-weekly-premium-model)
-4. [5 Parametric Triggers](#4-5-parametric-triggers)
-5. [AI / ML Architecture](#5-ai--ml-architecture)
-6. [Fraud Detection Design](#6-fraud-detection-design)
-7. [Tech Stack](#7-tech-stack)
-8. [Web vs Mobile Decision](#8-web-vs-mobile-decision)
-9. [System Architecture](#9-system-architecture)
-10. [6-Week Development Roadmap](#10-6-week-development-roadmap)
-11. [Repository Structure](#11-repository-structure)
-12. [Getting Started](#12-getting-started)
+## 📋 Table of Contents
+- [The Problem](#-the-problem)
+- [Our Solution](#-our-solution)
+- [Persona & User Scenarios](#-persona--user-scenarios)
+- [Application Workflow](#-application-workflow)
+- [Weekly Premium Model](#-weekly-premium-model)
+- [Parametric Triggers](#-parametric-triggers)
+- [AI/ML Integration Plan](#-aiml-integration-plan)
+- [Fraud Detection Design](#-fraud-detection-design)
+- [Platform Choice](#-platform-choice--web)
+- [Tech Stack](#-tech-stack)
+- [Development Plan](#-development-plan)
 
 ---
 
-## 1. The Problem
+## 🚨 The Problem
 
-### The Human Story
+India's food delivery workers (Swiggy, Zomato) are the backbone of urban commerce — but they are completely exposed to weather-linked income loss.
 
-**Raju, 27**, is a Swiggy delivery rider in Bangalore. He earns an average of **₹600/day** — ₹18,000/month when conditions are good. But during monsoon months (June–September), he loses **30% of his monthly income**. On an IMD Red Alert rain day, he earns **₹0**.
+- A heavy rain day = **₹0 earnings** for a delivery rider
+- Gig workers lose **20–30% of monthly income** during monsoon months
+- **No insurance product exists** that protects this income loss
+- Traditional insurance is too complex, too slow, and not structured for weekly earners
 
-Yet his expenses don't pause:
-- Fuel: ₹80/day
-- Phone data plan: ₹29/day
-- EMI for his scooter: ₹3,200/month
-- Rent: ₹6,500/month
-
-> *On a red-alert rain day, Raju earns nothing — but his EMIs are still due.*
-
-### Three Dimensions of the Problem
-
-| Dimension | Detail |
-|-----------|--------|
-| **Suddenness** | A rain alert gives zero time to save up — income loss is instant and complete |
-| **Product Gap** | No insurance product covers weather-linked income loss for gig workers |
-| **Accessibility** | Traditional insurance is too complex — weekly gig workers cannot afford monthly premiums with long claim processes |
-
-### Market Scale
-
-- **5 million+** food delivery workers in India (Swiggy + Zomato combined)
-- **₹2,400 Cr** average annual income lost to weather disruptions across this workforce
-- **0 insurance products** currently address this specific risk
+When disruptions occur, workers bear the full financial loss with **zero safety net**.
 
 ---
 
-## 2. Our Solution
+## 💡 Our Solution
 
-**RainGuard AI** is a **parametric insurance platform** designed exclusively for food delivery workers (Swiggy / Zomato) in Tier-1 Indian cities.
+**RainGuard AI** is a parametric insurance platform exclusively for food delivery workers on Swiggy and Zomato in Tier-1 Indian cities (Bangalore, Mumbai, Chennai, Hyderabad).
 
-### What is Parametric Insurance?
-
-Unlike traditional insurance that requires workers to *prove* loss with paperwork, receipts, and waiting periods — **parametric insurance pays automatically when a pre-agreed trigger event occurs**.
-
-No paperwork. No waiting. No claims form. No rejection risk.
-
-### How It Works — Raju's Journey
+### What makes it parametric?
+Unlike traditional insurance where you file a claim and wait weeks, **parametric insurance pays automatically** the moment a pre-agreed trigger event is detected — no paperwork, no waiting, no rejection risk.
 
 ```
-1. Raju downloads the RainGuard app
-2. Creates a profile (name, phone, pincode, delivery platform)
-3. Picks a weekly coverage plan (Basic / Standard / Plus)
-4. Pays ₹25–50 weekly premium via UPI
-
-— [Heavy rain falls in Bangalore] —
-
-5. Our Weather API detects 38mm rainfall in 3 hours in Raju's pincode
-6. Trigger fires automatically
-7. Risk & fraud checks run in seconds
-8. Razorpay sends ₹300 (Standard) to Raju's UPI
-9. Raju gets a push notification: "₹300 payout received. Stay safe."
+Rain detected above threshold in worker's zone
+        ↓
+System triggers automatically
+        ↓
+UPI payout sent to worker's account
+        ↓
+Worker receives money — same day
 ```
 
-### Target Persona & Cities
-
-Exclusively targeting **food delivery workers** (not cab drivers, not retail delivery) in:
-- 🏙️ Bangalore
-- 🏙️ Mumbai
-- 🏙️ Chennai
-- 🏙️ Hyderabad
-
-> **Why food delivery specifically?** Hot food cannot be delayed — delivery riders in this category face the most acute income impact from weather, making our parametric triggers razor-sharp and defensible.
+### What we cover (and what we don't)
+| ✅ Covered | ❌ Not Covered |
+|---|---|
+| Income lost due to heavy rainfall | Health or medical expenses |
+| Income lost due to extreme heat | Vehicle repairs |
+| Income lost due to hazardous AQI | Accidents |
+| Income lost due to IMD Red Alerts | Life insurance |
 
 ---
 
-## 3. Weekly Premium Model
+## 👤 Persona & User Scenarios
 
-Gig workers think and earn **week-to-week**. Our premium is structured weekly to match their cash flow.
+### Primary Persona — Raju, 27, Bangalore
+
+> Raju delivers for Swiggy in Bangalore's Koramangala–Indiranagar zone. He earns ₹600/day on a good day — about ₹4,000/week. During monsoon months (June–September), he loses 25–30% of his income because orders dry up and riding in heavy rain is dangerous. He has no savings buffer, pays ₹3,200/month rent, and has a bike EMI of ₹1,800/month.
+
+**Scenario 1 — Heavy Rain Event**
+It's a Tuesday evening. IMD issues a Red Alert for Bangalore. Rainfall crosses 40mm in 3 hours in Koramangala. RainGuard detects this via the Weather API, validates Raju's GPS is in the affected zone, and automatically sends ₹300 to his UPI account. Raju receives a push notification. He didn't file anything.
+
+**Scenario 2 — Extreme Heat Event**
+It's May in Chennai. Temperature crosses 44°C. Raju's friend Suresh, a Zomato rider in Chennai, is registered on RainGuard. The heat trigger fires. Suresh gets ₹200 sent to his account automatically. He works a shorter morning shift instead of risking the afternoon heat.
+
+**Scenario 3 — Attempted Fraud**
+A worker tries to claim by spoofing their GPS location to appear inside a rain zone while actually working elsewhere. RainGuard's fraud detection layer cross-references their actual location history and delivery activity during the claimed window. The claim is automatically flagged and held for review.
+
+---
+
+## 🔄 Application Workflow
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    WORKER JOURNEY                        │
+└─────────────────────────────────────────────────────────┘
+
+[1. ONBOARDING]
+Worker downloads app → Registers with phone number
+→ Enters delivery platform (Swiggy/Zomato)
+→ Enters primary delivery zone / pincode
+→ AI Risk Engine scores their location (Low/Medium/High risk)
+→ Weekly premium is calculated and shown
+
+[2. POLICY SELECTION]
+Worker picks coverage tier:
+  Basic   → ₹20–30/week → ₹150 max per event
+  Standard → ₹30–40/week → ₹300 max per event
+  Plus    → ₹40–50/week → ₹500 max per event
+→ Worker pays via UPI / auto-debit weekly
+
+[3. ACTIVE COVERAGE]
+RainGuard monitors weather APIs 24/7 for worker's zone
+→ Trigger detected → Fraud check runs automatically
+→ If valid → Payout sent to worker's UPI
+→ Worker receives push notification + SMS
+
+[4. DASHBOARD]
+Worker can see:
+  - Current week's coverage status
+  - Past payouts received
+  - Upcoming weather risk forecast for their zone
+  - Total income protected this month
+```
+
+---
+
+## 💰 Weekly Premium Model
+
+Gig workers think and earn week-to-week. Our premium is structured weekly to match this cycle.
 
 ### Formula
 
 ```
-Final Premium = Base Premium + City Risk Modifier + Pincode Variance Modifier + Hours Modifier
+Final Weekly Premium = Base Premium + Risk Modifiers
+
+Base Premium = ₹25/week
+
+Modifiers (applied by AI Risk Engine):
+  City monsoon risk zone:
+    Low risk city    → -₹5
+    Medium risk city →  ₹0
+    High risk city   → +₹8
+
+  Pincode flood history (5yr IMD data):
+    Low variance     →  ₹0
+    Medium variance  → +₹3
+    High variance    → +₹7
+
+  Worker delivery hours/week (income at stake):
+    < 30 hrs/week    →  ₹0
+    30–50 hrs/week   → +₹3
+    > 50 hrs/week    → +₹5
+
+Final Range: ₹20/week (low risk) to ₹50/week (high risk)
 ```
 
-| Component | Range | Description |
-|-----------|-------|-------------|
-| **Base Premium** | ₹25/week | Starting point for all workers |
-| City Monsoon Risk | -₹5 to +₹8 | Low / Medium / High monsoon risk zone |
-| Historical Rainfall Variance | +₹0 to +₹7 | Based on 5-year IMD pincode data |
-| Delivery Hours/Week | +₹0 to +₹5 | More hours = more at-risk income |
-| **Final Weekly Premium** | **₹20 – ₹50** | After all modifiers applied |
+### Payout Thresholds (IMD-aligned)
 
-### Coverage Tiers
+| Trigger Event | Threshold | Payout (Basic) | Payout (Standard) | Payout (Plus) |
+|---|---|---|---|---|
+| Heavy Rainfall | >35mm in 3 hours | ₹150 | ₹300 | ₹500 |
+| Very Heavy Rainfall | >65mm in 3 hours | ₹150 | ₹300 | ₹500 |
+| IMD Red Alert (City) | Issued for worker's district | ₹150 | ₹300 | ₹500 |
+| Extreme Heat | Temperature > 43°C | ₹100 | ₹200 | ₹350 |
+| AQI Hazardous | AQI > 300 (CPCB data) | ₹100 | ₹200 | ₹350 |
 
-| Tier | Weekly Premium (approx.) | Max Payout per Event |
-|------|--------------------------|----------------------|
-| **Basic** | ₹20–30 | ₹150 |
-| **Standard** | ₹30–40 | ₹300 |
-| **Plus** | ₹40–50 | ₹500 |
+> **Cooldown rule:** One payout per trigger event per worker per 24-hour window. Prevents duplicate claims for the same event.
 
-### Premium Justification
-
-- Average gig worker spends ₹80–120/day on fuel and operational costs
-- At ₹25–50/week, the premium is **4–8% of one average earning day**
-- A single payout of ₹300 (Standard) covers 1.5 lost work days — **net positive on any single trigger event**
+### Business Model (Loss Ratio)
+RainGuard profits from workers whose zones do not trigger in a given week. Not every pincode experiences the same weather. A city-wide Red Alert is the risk scenario — managed through zone-level pricing and the 24hr cooldown window.
 
 ---
 
-## 4. Five Parametric Triggers
+## ⚡ Parametric Triggers
 
-Each trigger is connected to a real public API (or mock) and fires automatically when the threshold is crossed.
+We build exactly 5 automated triggers using public and mock APIs:
 
-| # | Trigger | API / Source | Threshold | Payout (Basic / Standard / Plus) | Cooldown |
-|---|---------|-------------|-----------|----------------------------------|----------|
-| 1 | **Heavy Rainfall** | OpenWeatherMap (free) | >35mm in 3 hours in worker pincode | ₹150 / ₹300 / ₹500 | 24 hours |
-| 2 | **IMD Red Alert** | IMD scrape or mock JSON | Red/Orange Alert issued for worker's district | ₹150 / ₹300 / ₹500 | 24 hours |
-| 3 | **AQI Hazardous** | OpenAQ API (free, no key) | AQI > 300 (CPCB Hazardous category) | ₹100 / ₹200 / ₹350 | 12 hours |
-| 4 | **Extreme Heat** | OpenWeatherMap (free) | Temperature > 43°C | ₹100 / ₹200 / ₹350 | 12 hours |
-| 5 | **Platform Outage** | Simulated Swiggy/Zomato API | 0 orders assigned for 2+ hours | ₹100 / ₹200 / ₹300 | 6 hours |
+| # | Trigger Name | API / Data Source | Threshold | Cooldown |
+|---|---|---|---|---|
+| 1 | Heavy Rainfall | OpenWeatherMap (free tier) | >35mm in 3hr in worker's pincode | 24 hours |
+| 2 | IMD Red/Orange Alert | IMD alert feed / mock JSON | Alert issued for worker's district | 24 hours |
+| 3 | AQI Hazardous | OpenAQ API (free, no key needed) | AQI > 300 | 12 hours |
+| 4 | Extreme Heat | OpenWeatherMap (free tier) | Temperature > 43°C | 12 hours |
+| 5 | Platform Outage | Simulated Swiggy/Zomato API | 0 orders assigned for 2+ hours | 6 hours |
 
-### Trigger Architecture Notes
-
-- **Triggers 1, 3, 4** use real free-tier APIs — production-ready
-- **Trigger 2** uses a mock JSON scraped from IMD during live usage; safe placeholder for Phase 1
-- **Trigger 5** is fully simulated via our internal mock — accepted per Guidewire DEVTrails rules
-- **Anti-duplicate logic**: One payout per trigger type per worker per cooldown window (managed via Redis TTL keys)
+**Trigger Engine Logic:**
+```python
+# Pseudocode — trigger evaluation loop
+def evaluate_triggers(worker):
+    zone = worker.pincode
+    
+    rainfall = weather_api.get_rainfall(zone, last_3_hours)
+    if rainfall > 35:
+        if not cooldown_active(worker, "rainfall", hours=24):
+            initiate_payout(worker, trigger="rainfall")
+    
+    aqi = openaq_api.get_aqi(zone)
+    if aqi > 300:
+        if not cooldown_active(worker, "aqi", hours=12):
+            initiate_payout(worker, trigger="aqi")
+    
+    # ... repeat for heat, IMD alert, platform outage
+```
 
 ---
 
-## 5. AI / ML Architecture
+## 🤖 AI/ML Integration Plan
 
 ### Model 1 — Risk Scoring Engine (Premium Calculation)
 
-Produces a **0–100 risk score** per worker/location that feeds the premium formula.
+**Purpose:** Produce a 0–100 risk score per worker/location that feeds the premium formula.
 
 | Item | Detail |
-|------|--------|
-| **Algorithm** | Random Forest / XGBoost (scikit-learn) |
-| **Input Features** | Pincode flood history (IMD 5yr), rainfall variance, claim density by zone, delivery platform type, worker hours/week |
-| **Training Data** | IMD historical rainfall CSVs (public domain) + 5,000 synthetic worker profiles |
-| **Output** | Risk score 0–100 → mapped to premium modifier (₹-5 to +₹20) |
-| **Integration** | Called at onboarding, refreshed every Monday |
-| **Inference Time** | <200ms per worker |
+|---|---|
+| Algorithm | Random Forest / XGBoost (scikit-learn) |
+| Input Features | Pincode flood history (IMD 5yr data), rainfall variance, historical claim density by zone, delivery platform type |
+| Training Data | IMD historical rainfall CSVs (public) + synthetic worker profiles |
+| Output | Risk score 0–100 → mapped to premium modifier |
+| When It Runs | At worker onboarding + refreshed weekly |
 
-**Risk Score → Premium Modifier Mapping:**
+### Model 2 — Fraud Detection (Anomaly Detection)
 
-```python
-def score_to_modifier(score: int) -> int:
-    if score < 20:   return -5    # Low risk city, dry season
-    elif score < 40: return 0     # Base rate
-    elif score < 60: return 5     # Moderate monsoon zone
-    elif score < 80: return 10    # High-risk pincode
-    else:            return 15    # Extreme risk (coastal + monsoon)
-```
+**Purpose:** Detect fraudulent claims before payout is processed.
 
-**Key Features Used:**
+| Item | Detail |
+|---|---|
+| Algorithm | Isolation Forest (unsupervised anomaly detection) |
+| Input Features | GPS location at claim time, time delta between trigger and claim, claim frequency per worker, delivery activity during disruption window |
+| Output | Anomaly score 0–1. Score > 0.7 = flag for review. Score > 0.9 = auto-reject |
+| When It Runs | Every time a payout is about to be triggered |
 
-```
-- avg_rainfall_5yr_mm         : Historical average rainfall (mm/year)
-- rainfall_variance           : Std. deviation of monthly rainfall
-- flood_events_5yr            : Number of flood events in pincode
-- claim_density_zone          : Claims per 100 workers in zone (prior data)
-- delivery_hours_per_week     : Proxy for income at stake
-- city_risk_tier              : Bangalore=High, Mumbai=High, Chennai=Medium, Hyderabad=Medium
-```
+### Dynamic Pricing Intelligence
+The risk model also enables **hyper-local pricing** — a worker in a pincode historically safe from waterlogging pays ₹2–5 less per week than a worker in a flood-prone pincode, even within the same city. This is the core AI innovation beyond rule-based pricing.
 
 ---
 
-## 6. Fraud Detection Design
+## 🔍 Fraud Detection Design
 
-Three-layer system ensures RainGuard cannot be abused, protecting the insurance pool.
+Fraud detection runs as a **3-layer system** before every payout:
 
-### Layer 1 — GPS Cross-Reference (Automatic, Real-Time)
+### Layer 1 — GPS Cross-Reference (Automatic)
+- At claim time, system checks worker's last known GPS location
+- If worker's location is **more than 2km from the rainfall event centroid** → flagged
+- Logic: If it's raining heavily in Koramangala, a worker showing GPS in Whitefield shouldn't be claiming
 
-| Check | Logic |
-|-------|-------|
-| **What it does** | At claim time, fetches worker's last recorded GPS location |
-| **Flag condition** | Worker's last location is >2km from the rainfall event centroid |
-| **Action** | Claim flagged for manual review; payout paused 24 hours |
-| **Why it works** | A rider who wasn't in the rain zone cannot claim for it |
+### Layer 2 — ML Anomaly Detection (Pattern-Based)
+- Isolation Forest model scores the claim against historical patterns
+- Red flags: claiming in a week with 0 city alerts, 3+ claims in 2 weeks, claim timing always within minutes of trigger
+- Score > 0.7 → held for manual review
+- Score > 0.9 → auto-rejected, insurer notified
 
-### Layer 2 — ML Anomaly Detection (Isolation Forest)
-
-| Item | Detail |
-|------|--------|
-| **Algorithm** | Isolation Forest (scikit-learn, unsupervised) |
-| **Input Features** | claim_frequency_30d, avg_payout_amount, hour_of_claim, days_since_enrollment, claim_to_premium_ratio |
-| **Output** | Anomaly score 0.0–1.0 |
-| **Thresholds** | Score >0.7 → Review queue \| Score >0.9 → Auto-reject |
-| **Training** | Bootstrapped on synthetic clean + injected fraudulent profiles |
-
-```python
-# Pseudocode: Isolation Forest fraud check
-def check_fraud(claim: Claim, worker: Worker) -> FraudResult:
-    features = extract_features(claim, worker)  
-    score = isolation_forest.decision_function([features])
-    normalized = normalize(score)  # 0.0 = normal, 1.0 = anomalous
-    
-    if normalized > 0.9:
-        return FraudResult(action="AUTO_REJECT", score=normalized)
-    elif normalized > 0.7:
-        return FraudResult(action="MANUAL_REVIEW", score=normalized)
-    else:
-        return FraudResult(action="APPROVE", score=normalized)
-```
-
-### Layer 3 — Platform Activity Check (Mock API)
-
-| Check | Logic |
-|-------|-------|
-| **What it does** | Queries mock Swiggy/Zomato API for worker's delivery activity |
-| **Flag condition** | Worker shows completed deliveries during the claimed disruption window |
-| **Action** | If active orders found → Claim auto-denied |
-| **Why it works** | A worker who was delivering during a "rain outage" wasn't actually impacted |
+### Layer 3 — Platform Activity Validation (API Check)
+- Cross-reference with mock Swiggy/Zomato delivery data
+- If platform shows worker **completed deliveries during the claimed disruption window** → claim denied
+- Example: Rainfall trigger fires at 6pm. Worker claims. But platform API shows they completed 5 orders between 5:30–7pm → claim is invalid.
 
 ---
 
-## 7. Tech Stack
+## 🖥️ Platform Choice — Web
+
+We chose a **Web Application** over a native mobile app for Phase 1 for the following reasons:
+
+| Factor | Reasoning |
+|---|---|
+| Insurer dashboard | Admin and insurer users need desktop access for analytics — not practical on mobile |
+| Development speed | React web app is faster to build and demo for Phase 1 |
+| Worker access | Workers can access via mobile browser — no app store approval needed |
+| Native mobile app | Planned for Phase 3 (Soar) as a dedicated React Native app |
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology | Justification |
-|-------|-----------|---------------|
-| **Backend** | Python — FastAPI | Fast to build, native ML library support, clean REST APIs, async support |
-| **Frontend** | React (Web App) | Works on mobile browser; insurer dashboard needs desktop; mobile app is Phase 3 |
-| **Database** | PostgreSQL + Redis | PostgreSQL for relational data (workers, policies, claims); Redis for real-time trigger state & cooldown TTLs |
-| **AI / ML** | scikit-learn + pandas | Sufficient for Phase 1–2 models; explainable to non-technical judges |
-| **Deployment** | Render.com (free tier) | Live public URL; judges can test; no localhost submissions |
-| **Weather API** | OpenWeatherMap | Free tier: 1,000 calls/day; real data for all 4 target cities |
-| **AQI API** | OpenAQ | Free, no API key needed, covers all major Indian cities via REST |
-| **Payments** | Razorpay Test Mode | Simulated UPI payout; industry-standard for India; sandbox fully available |
+|---|---|---|
+| Backend | Python — FastAPI | Fast to build, native ML library support, clean REST APIs |
+| Frontend | React.js | Works on mobile browser; insurer dashboard needs desktop |
+| Database | PostgreSQL | Relational data for workers, policies, claims |
+| Cache / State | Redis | Real-time trigger state and cooldown tracking |
+| AI / ML | scikit-learn + pandas | Sufficient for Phase 1–2 models; easy to demo |
+| Deployment | Render.com (free tier) | Live public URL for judges to test |
+| Weather API | OpenWeatherMap | Free tier: 1,000 calls/day; covers all target cities |
+| AQI API | OpenAQ | Free, no API key needed, covers Indian cities |
+| Payments | Razorpay Test Mode | Simulated UPI payout; industry-standard sandbox |
 
----
-
-## 8. Web vs Mobile Decision
-
-| Factor | Web App (Our Choice ✅) | Native Mobile App |
-|--------|------------------------|-------------------|
-| **Development Speed** | 1–2 weeks for MVP | 3–4 weeks minimum |
-| **Phase 1 Scope** | Wireframes + React screens | Not feasible in 2 weeks |
-| **Insurer Dashboard** | Full desktop experience | Awkward on mobile |
-| **Worker Access** | Works in mobile browser | Requires Play Store |
-| **Phase 3 Plan** | Convert to React Native / PWA | Planned for Phase 3 |
-
-**Decision:** Build a responsive **React web app** that is **mobile-browser-friendly** for workers, and **desktop-optimized** for the insurer dashboard. A dedicated Android app is on the Phase 3 roadmap.
-
----
-
-## 9. System Architecture
+### System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        USER LAYER                               │
-│  Worker App (React)  |  Insurer Dashboard  |  Admin Portal      │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │ HTTPS
-┌──────────────────────────────▼──────────────────────────────────┐
-│                    FastAPI GATEWAY                              │
-│           Auth (JWT)  |  Rate Limiting  |  Routing             │
-└────┬──────────────┬────────────┬──────────────┬────────────────┘
-     │              │            │              │
-┌────▼───┐  ┌──────▼──┐  ┌─────▼────┐  ┌──────▼──────┐
-│ Risk   │  │ Policy  │  │  Claim   │  │   Fraud     │
-│ Engine │  │ Service │  │ Service  │  │  Detector   │
-└────┬───┘  └──────┬──┘  └─────┬────┘  └──────┬──────┘
-     │              │            │              │
-┌────▼──────────────▼────────────▼──────────────▼──────┐
-│                  EXTERNAL APIs                        │
-│  OpenWeatherMap | OpenAQ | Mock IMD | Razorpay (test)│
-└───────────────────────────────────────────────────────┘
-     │
-┌────▼──────────────────────────────────────────────────┐
-│                   DATA LAYER                          │
-│    PostgreSQL (workers, policies, claims)              │
-│    Redis (trigger state, cooldown TTLs)                │
-│    Model Store (scikit-learn pickle files)             │
-└───────────────────────────────────────────────────────┘
-```
-
-All four core services are independent microservices communicating via REST, enabling parallel development across team members.
-
----
-
-## 10. 6-Week Development Roadmap
-
-| Phase | Weeks | Theme | What We Build |
-|-------|-------|-------|---------------|
-| **🌱 Seed** | 1–2 | Ideate & Foundation | README, repo, wireframes, FastAPI setup, data model design, 2-min video |
-| **📈 Scale** | 3–4 | Automation & Protection | Full registration flow, policy management, premium calculation engine, 5 parametric triggers, basic claims flow, ML risk model integration |
-| **🚀 Soar** | 5–6 | Perfect for Workers | Advanced fraud detection (3 layers), Razorpay simulated payouts, worker + insurer dashboards, final pitch deck, 5-min demo video |
-
-### Week-by-Week Breakdown
-
-#### Seed Phase (Weeks 1–2) — Current
-- [x] README.md with full documentation
-- [x] GitHub repository + folder structure
-- [ ] React wireframes (Login, Dashboard, Payout screens)
-- [ ] FastAPI /health endpoint + data models
-- [ ] 2-minute video
-
-#### Scale Phase (Weeks 3–4)
-- [ ] Worker registration + JWT auth
-- [ ] Policy creation + premium calculation API
-- [ ] Weather trigger polling service (OpenWeatherMap + OpenAQ)
-- [ ] Claims auto-filing when threshold crossed
-- [ ] Risk scoring ML model trained + integrated
-- [ ] Basic worker dashboard showing policy + claim history
-
-#### Soar Phase (Weeks 5–6)
-- [ ] All 3 fraud detection layers operational
-- [ ] Razorpay test mode payout flow
-- [ ] Insurer dashboard (claim overrides, policy management)
-- [ ] Admin portal (trigger logs, fraud review queue)
-- [ ] End-to-end demo with simulated trigger event
-- [ ] Final pitch deck + 5-minute demo video
-
----
-
-## 11. Repository Structure
-
-```
-rainguard-ai/
-├── README.md                   # This document
-├── backend/                    # FastAPI backend
-│   ├── main.py                 # App entry point + gateway
-│   ├── requirements.txt        # Python dependencies  
-│   ├── routers/                # API route handlers
-│   │   ├── workers.py          # Worker registration, profile
-│   │   ├── policies.py         # Policy creation, management
-│   │   ├── claims.py           # Claim filing, status
-│   │   └── triggers.py         # Parametric trigger endpoints
-│   ├── models/                 # SQLAlchemy ORM models
-│   │   ├── worker.py
-│   │   ├── policy.py
-│   │   └── claim.py
-│   └── services/               # Business logic
-│       ├── risk_engine.py      # Premium calculation
-│       ├── fraud_detector.py   # Fraud detection layers
-│       └── trigger_service.py  # Weather API polling
-├── frontend/                   # React web application
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Login.jsx
-│   │   │   ├── Dashboard.jsx
-│   │   │   └── PayoutNotification.jsx
-│   │   └── components/
-│   │       ├── TriggerStatus.jsx
-│   │       └── PremiumCard.jsx
-│   └── package.json
-├── ml/                         # ML models and training scripts
-│   ├── risk_scoring/
-│   │   ├── train_model.py      # Model training script
-│   │   └── predict.py          # Inference API wrapper
-│   ├── fraud_detection/
-│   │   ├── isolation_forest.py # Anomaly detection model
-│   │   └── pseudocode.md       # Algorithm documentation
-│   └── data/                   # Training data (synthetic + IMD)
-└── docs/
-    ├── architecture.md          # Detailed system design
-    └── api-spec.md              # REST API specification
+┌─────────────────────────────────────────────────────────────┐
+│                        USER LAYER                            │
+│   Worker App (React)  |  Insurer Dashboard  |  Admin Portal  │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────┐
+│                      API GATEWAY                             │
+│              Auth · Rate Limiting · Routing                  │
+└──────┬──────────────┬──────────────┬───────────┬────────────┘
+       │              │              │           │
+  ┌────▼────┐   ┌─────▼─────┐ ┌─────▼────┐ ┌───▼────────┐
+  │  Risk   │   │  Policy   │ │  Claim   │ │  Fraud     │
+  │ Engine  │   │  Service  │ │ Service  │ │ Detector   │
+  └────┬────┘   └─────┬─────┘ └─────┬────┘ └───┬────────┘
+       │              │              │           │
+┌──────▼──────────────▼──────────────▼───────────▼──────────┐
+│                    EXTERNAL APIs                            │
+│  OpenWeatherMap  |  OpenAQ  |  Platform API  |  Razorpay   │
+└──────────────────────────────────────────────────────────┘
+       │
+┌──────▼──────────────────────────────────────────────────┐
+│                     DATA LAYER                           │
+│   PostgreSQL (workers, policies, claims)                 │
+│   Redis (trigger state, cooldowns)                       │
+│   ML Model Store (scikit-learn pickle files)             │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 12. Getting Started
+## 📅 Development Plan
 
-### Backend
+### Phase 1 — Seed (Weeks 1–2) | March 4–20
+**Theme: Ideate & Know Your Delivery Worker**
+- [x] Problem definition and persona research
+- [x] Premium model design with IMD-aligned thresholds
+- [x] 5 parametric trigger definitions
+- [x] AI/ML architecture plan
+- [x] Fraud detection 3-layer design
+- [x] Tech stack finalized
+- [ ] GitHub repository structure
+- [ ] Basic React wireframes (Login, Dashboard, Payout screen)
+- [ ] FastAPI project setup with folder structure
+- [ ] 2-minute strategy video
 
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-# API available at http://localhost:8000
-# Docs at http://localhost:8000/docs
-```
+### Phase 2 — Scale (Weeks 3–4) | March 21–April 4
+**Theme: Protect Your Worker**
+- [ ] Worker registration and onboarding flow
+- [ ] Insurance policy management (create, view, renew)
+- [ ] Dynamic premium calculation engine (AI risk model integrated)
+- [ ] 5 parametric trigger engine (live API connections)
+- [ ] Claims management system
+- [ ] Basic fraud detection (Layer 1 + Layer 2)
+- [ ] 2-minute demo video
 
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm start
-# App available at http://localhost:3000
-```
-
-### Health Check
-
-```bash
-curl http://localhost:8000/health
-# {"status": "healthy", "service": "RainGuard AI API", "version": "0.1.0"}
-```
-
----
-
-## Team
-
-Built for **Guidewire DEVTrails 2026** — Parametric Insurance Challenge.
-
-> *Build fast. Spend smart. Don't go broke.*
+### Phase 3 — Soar (Weeks 5–6) | April 5–17
+**Theme: Perfect for Your Worker**
+- [ ] Advanced fraud detection (all 3 layers)
+- [ ] Razorpay test mode payout integration
+- [ ] Worker dashboard (earnings protected, active coverage)
+- [ ] Insurer dashboard (loss ratios, predictive analytics)
+- [ ] Final pitch deck (PDF)
+- [ ] 5-minute demo video with simulated disruption walkthrough
 
 ---
 
-*RainGuard AI — Protecting India's gig economy, one raindrop at a time. 🌧️*
+
+---
+
+## 📄 License
+This project is built for Guidewire DEVTrails 2026. All rights reserved.
+
+---
+
+<p align="center">
+  Built with ❤️ for India's gig workers · Guidewire DEVTrails 2026
+</p>
